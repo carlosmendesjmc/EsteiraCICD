@@ -1,27 +1,27 @@
 name: CICD
 
-on:                                     # (on)é um gatilho, quando sempre que tiver um push na branche main sera execultado.
+on:                                  
   push:
     branches: [main]
 
 jobs:     
-  CICD:                                 # nome da minha Pipeline
+  CICD:                                
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v4.1.5  # copia todos arquivos do seu repositorio para o executor da minha Pipeline
+      - uses: actions/checkout@v4.1.5 
       
-      - name: Docker Login                  #Dockerlogin  credenciais na biblioteca
+      - name: Docker Login                  
         uses: docker/login-action@v3.2.0
         with:
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASSWORD }}
-      - name: Build and push Docker images              #Docker build na biblioteca - Build and push Docker images
+      - name: Build and push Docker images              
         uses: docker/build-push-action@v5.3.0
         with:
-          context: .    #define onde os arquivos estao alocados
-          file: .       # o (.) indica que é o diretorio atual
-          push: true    # empurra para o diretorio la no dockerhub
+          context: .   
+          file: .       
+          push: true    
           tags: |
             carlosmendesjmc/resultadonba:v1         #v1 quer dizer primeira versão
             carlosmendesjmc/resultadonba:latest     # latest quer dizer ultima versão
