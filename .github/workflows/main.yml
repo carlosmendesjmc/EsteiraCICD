@@ -14,48 +14,17 @@ jobs:
       - name: Docker Login
         uses: docker/login-action@v3.2.0
         with:
-          username:
-          password:
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.PASSWORD }}
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v5.3.0
         with:
-        
-          python-version: '3.8'
+          context: .    #define onde os arquivos estao alocados
+          file: .       # o (.) indica que é o diretorio atual
+          push: true    # empurra para o diretorio la no dockerhub
+          tags: |
+            resultado/nba:v1         #v1 quer dizer primeira versão
+            resultado/nba:latest     # latest quer dizer ultima versão
+            
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Run application
-        run: |
-          python app.py
-  
-  test:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.8'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Verify JSON file
-        run: |
-          python -c "import json; json.load(open('results.json'))"
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
-      - name: Deployment
-        run: echo "Deploying application..."
+     
