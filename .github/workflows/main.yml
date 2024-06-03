@@ -1,20 +1,26 @@
-name: CI/CD Pipeline
+name: CICD
 
-on:
+on:                                     # (on)é um gatilho, quando sempre que tiver um push na branche main sera execultado.
   push:
-    branches:
-      - main
+    branches: [main]
 
-jobs:
-  build:
+jobs:     
+  CICD:                                 # nome da minha Pipeline
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v4.1.5  # copia todos arquivos do seu repositorio para o executor da minha Pipeline
+      
+      - name: Docker Login
+        uses: docker/login-action@v3.2.0
+        with:
+          username:
+          password:
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
+        
           python-version: '3.8'
 
       - name: Install dependencies
