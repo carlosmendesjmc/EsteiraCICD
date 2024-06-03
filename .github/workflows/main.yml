@@ -23,8 +23,8 @@ jobs:
           file: .       # o (.) indica que é o diretorio atual
           push: true    # empurra para o diretorio la no dockerhub
           tags: |
-            resultado/nba:v1         #v1 quer dizer primeira versão
-            resultado/nba:latest     # latest quer dizer ultima versão
+            carlosmendesjmc/resultadonba:v1         #v1 quer dizer primeira versão
+            carlosmendesjmc/resultadonba:latest     # latest quer dizer ultima versão
             
 
      
