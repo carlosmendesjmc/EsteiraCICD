@@ -20,11 +20,11 @@ jobs:
         uses: docker/build-push-action@v5.3.0
         with:
           context: .   
-          file: .       
+          file: .     
           push: true    
           tags: |
-            carlosmendesjmc/resultadonba:v1         #v1 quer dizer primeira versão
-            carlosmendesjmc/resultadonba:latest     # latest quer dizer ultima versão
+            carlosmendesjmc/resultadonba:v1        
+            carlosmendesjmc/resultadonba:latest     
             
 
      
